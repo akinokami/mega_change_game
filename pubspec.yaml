@@ -39,6 +39,7 @@ dependencies:
   audioplayers: ^5.0.0
   flutter_screenutil: ^5.9.3
   flutter_launcher_icons: ^0.13.1
+  get: ^4.6.6
   get_storage: ^2.1.1
   flutter_switch: ^0.3.2
 
