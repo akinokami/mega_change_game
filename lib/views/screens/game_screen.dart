@@ -7,12 +7,15 @@ import 'package:mega_change_game/views/screens/setting_screen.dart';
 import 'package:mega_change_game/views/widgets/custom_text.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
+import '../../controller/score_controller.dart';
+
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final gameController = Get.put(GameController());
+    final scoreController = Get.put(ScoreController());
     return Scaffold(
       body: Obx(
         () => Container(
@@ -30,21 +33,29 @@ class GameScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    NiceButtons(
-                      width: 50,
-                      height: 50,
-                      borderRadius: 5,
-                      stretch: false,
-                      startColor: const Color.fromARGB(255, 138, 203, 141),
-                      endColor: Colors.green,
-                      borderColor: const Color.fromARGB(255, 31, 148, 35),
-                      gradientOrientation: GradientOrientation.Horizontal,
-                      onTap: (finish) {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.home,
-                        color: Colors.white,
+                    SizedBox(
+                      width: 70,
+                      child: Row(
+                        children: [
+                          NiceButtons(
+                            width: 50,
+                            height: 50,
+                            borderRadius: 5,
+                            stretch: false,
+                            startColor:
+                                const Color.fromARGB(255, 138, 203, 141),
+                            endColor: Colors.green,
+                            borderColor: const Color.fromARGB(255, 31, 148, 35),
+                            gradientOrientation: GradientOrientation.Horizontal,
+                            onTap: (finish) {
+                              Get.back();
+                            },
+                            child: const Icon(
+                              Icons.home,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
@@ -66,10 +77,11 @@ class GameScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                            text: gameController.score.toString(),
+                            text: gameController.score.value.toString(),
                           ),
-                          const CustomText(
-                            text: 'Best Score :' '300',
+                          CustomText(
+                            text:
+                                'Best Score :${scoreController.bestScore.value}',
                           ),
                         ],
                       ),
@@ -90,14 +102,14 @@ class GameScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.alarm,
                               color: Colors.white,
                             ),
                             CustomText(
-                              text: '01:00',
+                              text: gameController.timerText.value,
                               textColor: Colors.white,
                             ),
                           ],
@@ -234,7 +246,7 @@ class GameScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
-                        //
+                        gameController.pauseGame();
                       },
                       child: const Icon(
                         Icons.pause,
@@ -274,11 +286,8 @@ class GameScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SettingScreen()),
-                        );
+                        gameController.pauseGame();
+                        Get.to(() => const SettingScreen());
                       },
                       child: const Icon(
                         Icons.settings,
