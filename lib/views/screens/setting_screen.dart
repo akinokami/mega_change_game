@@ -38,7 +38,8 @@ class SettingScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
-                        Navigator.pop(context);
+                        soundController.vibrate();
+                        Get.back();
                       },
                       child: const Icon(
                         Icons.arrow_back_ios,
@@ -77,7 +78,7 @@ class SettingScreen extends StatelessWidget {
                       //     color: Color.fromARGB(255, 138, 203, 141),
                       //     borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: const Icon(
-                        Icons.vibration,
+                        Icons.volume_up,
                         color: Colors.white,
                       ),
                     ),
@@ -94,8 +95,55 @@ class SettingScreen extends StatelessWidget {
                       activeColor: Colors.green,
                       value: soundController.isMuted.value,
                       onToggle: (val) {
+                        soundController.vibrate();
                         soundController.isMuted.value = val;
                         soundController.muteUnmute();
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 138, 203, 141),
+                              Colors.green
+                            ]),
+                      ),
+                      // decoration: const BoxDecoration(
+                      //     color: Color.fromARGB(255, 138, 203, 141),
+                      //     borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Icon(
+                        Icons.vibration,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const CustomText(text: 'Virbration'),
+                    const Spacer(),
+                    FlutterSwitch(
+                      padding: 1.5,
+                      height: 23,
+                      width: 44,
+                      inactiveColor: Colors.grey, //const Color(0xFFE0E0E0),
+                      activeColor: Colors.green,
+                      value: soundController.isVibrate.value,
+                      onToggle: (val) {
+                        soundController.vibrate();
+                        soundController.isVibrate.value = val;
+                        soundController.vibrateOrNot();
                       },
                     ),
                   ],

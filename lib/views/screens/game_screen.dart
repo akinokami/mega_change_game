@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mega_change_game/controller/game_controller.dart';
+import 'package:mega_change_game/controller/sound_controller.dart';
 import 'package:mega_change_game/views/screens/setting_screen.dart';
 import 'package:mega_change_game/views/widgets/custom_text.dart';
 import 'package:nice_buttons/nice_buttons.dart';
@@ -16,6 +17,7 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final gameController = Get.put(GameController());
     final scoreController = Get.put(ScoreController());
+    final soundController = Get.put(SoundController());
     return Scaffold(
       body: Obx(
         () => Container(
@@ -48,6 +50,7 @@ class GameScreen extends StatelessWidget {
                             borderColor: const Color.fromARGB(255, 31, 148, 35),
                             gradientOrientation: GradientOrientation.Horizontal,
                             onTap: (finish) {
+                              soundController.vibrate();
                               Get.back();
                             },
                             child: const Icon(
@@ -154,6 +157,7 @@ class GameScreen extends StatelessWidget {
                                               .sportList[index].isSelectable ==
                                           true
                                       ? () {
+                                          soundController.vibrate();
                                           gameController.merge(
                                               sport: gameController
                                                   .sportList[index],
@@ -246,6 +250,7 @@ class GameScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
+                        soundController.vibrate();
                         gameController.pauseGame();
                       },
                       child: const Icon(
@@ -266,6 +271,7 @@ class GameScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
+                        soundController.vibrate();
                         gameController.resetGame();
                       },
                       child: const Icon(
@@ -286,6 +292,7 @@ class GameScreen extends StatelessWidget {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
+                        soundController.vibrate();
                         gameController.pauseGame();
                         Get.to(() => const SettingScreen());
                       },

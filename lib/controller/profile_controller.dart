@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mega_change_game/controller/sound_controller.dart';
 import 'package:mega_change_game/views/widgets/custom_text.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
@@ -52,32 +53,36 @@ class ProfileController extends GetxController {
           width: double.maxFinite,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    crossAxisSpacing: 15.0,
-                    mainAxisSpacing: 15.0,
-                  ),
-                  itemCount: avatorList.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        chooseAvator(avatorList[index]);
-                        Get.back();
-                      },
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Image.asset(
-                          avatorList[index],
-                          fit: BoxFit.cover,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      crossAxisSpacing: 15.0,
+                      mainAxisSpacing: 15.0,
+                    ),
+                    itemCount: avatorList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Get.find<SoundController>().vibrate();
+                          chooseAvator(avatorList[index]);
+                          Get.back();
+                        },
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset(
+                            avatorList[index],
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               NiceButtons(
@@ -89,6 +94,7 @@ class ProfileController extends GetxController {
                 borderColor: const Color.fromARGB(255, 31, 148, 35),
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
+                  Get.find<SoundController>().vibrate();
                   Get.back();
                 },
                 child: const CustomText(

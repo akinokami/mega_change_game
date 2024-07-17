@@ -2,13 +2,17 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'package:vibration/vibration.dart';
+
 class SoundController extends GetxController {
   final player = AudioPlayer();
   final isMuted = false.obs;
+  final isVibrate = false.obs;
 
   @override
   void onInit() {
     getMute();
+    getVibrate();
     super.onInit();
   }
 
@@ -30,6 +34,23 @@ class SoundController extends GetxController {
     }
     final box = GetStorage();
     box.write('isMuted', isMuted.value);
+  }
+
+  void getVibrate() {
+    final box = GetStorage();
+    isVibrate.value = box.read('isVibrate') ?? true;
+    box.write('isVibrate', isVibrate.value);
+  }
+
+  void vibrate() {
+    if (isVibrate.value) {
+      Vibration.vibrate();
+    }
+  }
+
+  void vibrateOrNot() {
+    final box = GetStorage();
+    box.write('isVibrate', isVibrate.value);
   }
 
   @override

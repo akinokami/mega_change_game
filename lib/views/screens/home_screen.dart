@@ -156,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderColor: const Color.fromARGB(255, 31, 148, 35),
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
+                        soundConroller.vibrate();
                         profileController.avatorDialog();
                       },
                       child: Image.asset(
@@ -203,6 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderColor: const Color.fromARGB(255, 31, 148, 35),
                     gradientOrientation: GradientOrientation.Horizontal,
                     onTap: (finish) {
+                      soundConroller.vibrate();
                       Get.to(() => const SettingScreen());
                     },
                     child: const Icon(
@@ -212,8 +214,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.20,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/logo.webp',
+                  height: MediaQuery.of(context).size.height * 0.20,
+                  fit: BoxFit.cover,
+                ),
+              ),
               const SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              const CustomText(
+                text: 'Mega Change',
+                size: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              const SizedBox(
+                height: 30,
               ),
               NiceButtons(
                 stretch: false,
@@ -222,6 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderColor: const Color.fromARGB(255, 31, 148, 35),
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
+                  soundConroller.vibrate();
                   Get.to(() => const GameScreen());
                 },
                 child: const CustomText(
@@ -240,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderColor: const Color.fromARGB(255, 167, 25, 25),
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
+                  soundConroller.vibrate();
                   exit(0);
                 },
                 child: const CustomText(

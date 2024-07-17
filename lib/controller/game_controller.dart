@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mega_change_game/controller/score_controller.dart';
+import 'package:mega_change_game/controller/sound_controller.dart';
 import 'package:mega_change_game/models/sport_model.dart';
 import 'package:mega_change_game/views/widgets/custom_text.dart';
 import 'package:nice_buttons/nice_buttons.dart';
@@ -159,6 +160,7 @@ class GameController extends GetxController {
               borderColor: const Color.fromARGB(255, 31, 148, 35),
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
+                Get.find<SoundController>().vibrate();
                 Get.back();
               },
               child: const CustomText(
@@ -180,6 +182,7 @@ class GameController extends GetxController {
         barrierDismissible: false,
         radius: 10,
         onWillPop: () async {
+          Get.find<SoundController>().vibrate();
           startTimer();
           Get.back();
           return false;
@@ -196,6 +199,7 @@ class GameController extends GetxController {
               borderColor: const Color.fromARGB(255, 31, 148, 35),
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
+                Get.find<SoundController>().vibrate();
                 startTimer();
                 Get.back();
               },
@@ -217,6 +221,7 @@ class GameController extends GetxController {
         barrierDismissible: false,
         radius: 10,
         onWillPop: () async {
+          Get.find<SoundController>().vibrate();
           resetGame();
           Get.back();
           return false;
@@ -234,6 +239,7 @@ class GameController extends GetxController {
               borderColor: const Color.fromARGB(255, 31, 148, 35),
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
+                Get.find<SoundController>().vibrate();
                 resetGame();
                 Get.back();
               },
