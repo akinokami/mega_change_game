@@ -18,7 +18,7 @@ class SoundController extends GetxController {
 
   void getMute() {
     final box = GetStorage();
-    isMuted.value = box.read('isMuted') ?? true;
+    isMuted.value = box.read('isMuted') ?? false;
     muteUnmute();
   }
 
@@ -38,7 +38,7 @@ class SoundController extends GetxController {
 
   void getVibrate() {
     final box = GetStorage();
-    isVibrate.value = box.read('isVibrate') ?? true;
+    isVibrate.value = box.read('isVibrate') ?? false;
     box.write('isVibrate', isVibrate.value);
   }
 

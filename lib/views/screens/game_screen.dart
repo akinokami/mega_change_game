@@ -211,7 +211,8 @@ class GameScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: const EdgeInsets.only(right: 5),
-                                  width: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.10,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: AssetImage(
