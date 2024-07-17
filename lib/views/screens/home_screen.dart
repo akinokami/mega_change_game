@@ -10,6 +10,7 @@ import 'package:mega_change_game/views/screens/setting_screen.dart';
 import 'package:mega_change_game/views/widgets/custom_text.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
+import '../../controller/profile_controller.dart';
 import '../../controller/sound_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -108,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final soundConroller = Get.put(SoundController());
     final scoreController = Get.put(ScoreController());
+    final profileController = Get.put(ProfileController());
     soundConroller.playSound();
     return Scaffold(
       body: Container(
@@ -124,15 +126,42 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircleAvatar(
-                      radius: 56,
-                      backgroundColor: Colors.green,
-                      child: Padding(
-                        padding: EdgeInsets.all(2), // Border radius
-                        child: ClipOval(child: Icon(Icons.person)),
+                  // InkWell(
+                  //   child: SizedBox(
+                  //     height: 50,
+                  //     width: 50,
+                  //     child: CircleAvatar(
+                  //       radius: 56,
+                  //       backgroundColor: Colors.green,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.all(2), // Border radius
+                  //         child: Image.asset(
+                  //           profileController.selectedAvator.value,
+                  //           fit: BoxFit.cover,
+                  //           width: 35,
+                  //         ),
+                  //         //ClipOval(child: Icon(Icons.person)),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  Obx(
+                    () => NiceButtons(
+                      width: 50,
+                      height: 50,
+                      borderRadius: 100,
+                      stretch: false,
+                      startColor: const Color.fromARGB(255, 138, 203, 141),
+                      endColor: Colors.green,
+                      borderColor: const Color.fromARGB(255, 31, 148, 35),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (finish) {
+                        profileController.avatorDialog();
+                      },
+                      child: Image.asset(
+                        profileController.selectedAvator.value,
+                        fit: BoxFit.cover,
+                        width: 35,
                       ),
                     ),
                   ),
